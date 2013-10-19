@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import random
 
@@ -46,47 +46,24 @@ letters = "abcdefghijklmnopqrstuvwxyz"
 class Grid(object):
     def __init__(self, wid, hgt):
         self.wid = wid
-	self.hgt = hgt
-	self.data = ['.'] * (wid * hgt)
-	self.used = [' '] * (wid * hgt)
+        self.hgt = hgt
+        self.data = ['.'] * (wid * hgt)
+        self.used = [' '] * (wid * hgt)
         self.words = []
 
     def to_text(self):
         result = []
-    	for row in xrange(self.hgt):
-	    result.append(''.join(self.data[row * self.wid :
+        for row in range(self.hgt):
+            result.append(''.join(self.data[row * self.wid :
                                   (row + 1) * self.wid]))
-	return '\n'.join(result)
+        return '\n'.join(result)
         
     def used_to_text(self):
         result = []
-    	for row in xrange(self.hgt):
-	    result.append(''.join(self.used[row * self.wid :
+        for row in xrange(self.hgt):
+            result.append(''.join(self.used[row * self.wid :
                                   (row + 1) * self.wid]))
-	return '\n'.join(result)
-
-    def to_pdf(self, filename):
-        from reportlab.pdfgen import canvas
-        from reportlab.lib.pagesizes import letter, A4
-
-        pagesize = A4
-        paper = canvas.Canvas(filename, pagesize=pagesize)
-        margin = 50
-        printwid, printhgt = map(lambda x: x - margin * 2, pagesize)
-        
-        gx = margin
-        gy = printhgt - margin
-        gdx = printwid / self.wid
-        gdy = printhgt / self.hgt
-        for y in xrange(self.hgt):
-            cy = gy - y * gdy
-            for x in xrange(self.wid):
-                cx = gx + x * gdx
-                p = x + self.wid * y
-                c = self.data[p]
-                paper.drawString(cx, cy, c)
-        paper.showPage()
-        paper.save()
+        return '\n'.join(result)
 
     def pick_word_pos(self, wordlen, directions):
         xd, yd = random.choice(directions)
@@ -136,7 +113,7 @@ class Grid(object):
         return True
 
     def fill_in_letters(self):
-        for p in xrange(self.wid * self.hgt):
+        for p in range(self.wid * self.hgt):
             if self.data[p] == '.':
                 self.data[p] = random.choice(letters)
 
@@ -179,9 +156,6 @@ if __name__ == '__main__':
     random.seed()
     grid = make_grid(sys.argv[1], sys.argv[2:])
     if grid is None:
-        print "Can't make a grid"
+        print("Can't make a grid")
     else:
-        print grid.to_text()
-        print
-        print grid.used_to_text()
-    grid.to_pdf("ws.pdf")
+        print(grid.to_text())
