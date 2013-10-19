@@ -6,7 +6,7 @@ grid.
 
 Usage:
 
- python wordsearch.py <difficulty> [word...]
+ python3 wordsearch.py <difficulty> [word...]
 
 The grid size, and permissible directions for words, is controlled by the
 difficulty setting, which is one of easy, normal and hard.
