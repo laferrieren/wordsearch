@@ -124,6 +124,11 @@ def make_grid(stylep="standard", words=[], tries=100):
     # Parse and validate the style parameter.
     size, directions = styles.get(stylep, (stylep, all_directions))
     size = size.split('x')
+
+    print size
+    print directions
+    print
+
     if len(size) != 2:
         raise ValueError("Invalid style parameter: %s" % stylep)
     try:
